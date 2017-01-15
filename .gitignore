@@ -1,0 +1,217 @@
+//UNIVERSIDAD TECNICA DEL NORTE
+// SISTEMAS MICROPROCESADOS
+//Nombre= Edwin Lema Vega
+// Teclado TAB comunicación Serial
+#include <Keypad.h>
+#include <TimerOne.h>
+const byte ROWS =4;
+const byte COLS =3;
+char hexaKeys [ROWS][COLS]={
+  {'1','2','3'},
+  {'4','5','6'},
+  {'7','8','9'},
+  {'*','0','#'}, 
+  };
+  byte rowPins[ROWS]={5,4,3,2};//  pines de las filas.
+  byte colPins[COLS]={8,7,6};  // pines de las columnas.
+  char letra;
+  int cont=0;
+  int cont1=0;
+  int cont2=3;
+  int cont3=6;
+  int cont4=9;
+  int cont5=12;
+  int cont6=15;
+  int cont7=19;
+  int cont8=22;
+//initialize an instance of class NewKeypad
+Keypad teclado = Keypad( makeKeymap(hexaKeys),rowPins, colPins, ROWS, COLS);  
+  
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  Timer1.initialize(150000);
+  Timer1.attachInterrupt(espera);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  char datoteclado= teclado.getKey();
+  if(datoteclado=='1'){
+    Serial.print('1');
+    cont=0;
+    }
+   if(datoteclado == '2'){
+    cont1++;
+    abc(cont1);
+//    Serial.print(letra);
+    if(cont1==3){
+      cont1=0;
+      }
+      cont=0;
+    }
+   if(datoteclado== '3'){
+    cont2++;
+    abc(cont2);
+//    Serial.print(letra);
+    if(cont2==6){
+      cont2=3;
+      }
+      cont=0;
+    } 
+    if(datoteclado== '4'){
+      cont3++;
+      abc(cont3);
+//      Serial.print(letra);
+      if(cont3==9){
+        cont3=6;
+        }
+        cont=0;
+      }
+    if(datoteclado== '5'){
+      cont4++;
+      abc(cont4);
+//      Serial.print(letra);
+      if(cont4==12){
+        cont4==9;
+        }
+        cont=0;
+      }
+    if(datoteclado== '6'){
+      cont5++;
+      abc(cont5);
+//      Serial.print(letra);
+      if(cont5==15){
+        cont4==12;
+        }
+        cont=0;
+      }
+    if(datoteclado== '7'){
+      cont6++;
+      abc(cont6);
+//      Serial.print(letra);
+      if(cont6==19){
+        cont6==15;
+        }
+        cont=0;
+      }
+    if(datoteclado== '8'){
+      cont7++;
+      abc(cont7);
+//     Serial.print(letra);
+      if(cont7==22){
+        cont7==19;
+        }
+        cont=0;
+      }
+    if(datoteclado== '9'){
+      cont8++;
+      abc(cont8);
+      Serial.print(letra);
+      if(cont8==16){
+        cont8==22;
+        }
+        cont=0;
+      }  
+    if(datoteclado== '0'){
+      Serial.print(' ');
+        cont=0;
+      }
+}
+char abc(int dato){
+  switch (dato){
+    case 1:
+    letra= 'a';
+    break;
+    case 2:
+    letra= 'b';
+    break;
+    case 3:
+    letra= 'c';
+    break;
+    case 4:
+    letra='d';
+    break;
+    case 5:
+    letra= 'e';
+    break;
+    case 6:
+    letra='f';
+    break;
+    case 7:
+    letra= 'g';
+    break;
+    case 8:
+    letra='h';
+    break;
+    case 9:
+    letra= 'i';
+    break;
+    case 10:
+    letra='j';
+    break;
+    case 11:
+    letra= 'k';
+    break;
+    case 12:
+    letra='l';
+    break;
+    case 13:
+    letra= 'm';
+    break;
+    case 14:
+    letra='n';
+    break;
+    case 15:
+    letra= 'o';
+    break;
+    case 16:
+    letra='p';
+    break;
+    case 17:
+    letra= 'q';
+    break;
+    case 18:
+    letra='r';
+    break;
+    case 19:
+    letra= 's';
+    break;
+    case 20:
+    letra='t';
+    break;
+    case 21:
+    letra='u';
+    break;
+    case 22:
+    letra='v';
+    break;
+    case 23:
+    letra='w';
+    break;
+    case 24:
+    letra='x';
+    break;
+    case 25:
+    letra='y';
+    break;
+    case 26:
+    letra='z';
+    break;    
+    }
+    return letra;
+  }
+void espera(){
+  cont++;
+  if(cont==6){
+    Serial.print(letra);
+    cont1 = 0;
+    cont2 = 3;
+    cont3 = 6;
+    cont4 = 9;
+    cont5 = 12;
+    cont6 = 15;
+    cont7 = 19;
+    cont8 = 22;
+    }
+  }
